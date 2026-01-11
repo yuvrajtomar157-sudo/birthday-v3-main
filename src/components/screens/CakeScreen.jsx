@@ -1,104 +1,123 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { AnimatePresence, motion } from "framer-motion";
-import Confetti from "react-confetti";
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import GradientButton from "../GradientButton";
 import { ArrowRight, Flame } from "lucide-react";
+import confetti from "canvas-confetti";
 
 export default function CakeScreen({ onNext }) {
   const [lit, setLit] = useState(false);
-  const [showConfetti, setShowConfetti] = useState(false);
 
   const lightCandle = () => {
     if (lit) return;
-
     setLit(true);
-    setShowConfetti(true);
 
+    // confetti burst
     setTimeout(() => {
-      setShowConfetti(false);
-    }, 1800); // perfect burst duration
+      confetti({
+        particleCount: 160,
+        spread: 100,
+        origin: { y: 0.6 },
+        colors: ["#ff4d8d", "#ffd166", "#c77dff", "#4cc9f0"],
+      });
+    }, 400);
   };
 
   return (
-    <div className="px-4 md:px-6 py-10 text-center relative overflow-hidden">
-
-      {/* CONFETTI */}
-      {showConfetti && (
-        <Confetti
-          numberOfPieces={260}
-          gravity={0.35}
-          recycle={false}
-        />
-      )}
+    <div className="relative h-screen flex flex-col items-center justify-center overflow-hidden">
 
       {/* TITLE AFTER CANDLE */}
       {lit && (
-    <motion.div
-      className="absolute top-20 left-0 w-full text-center"
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 1, delay: 0.4 }}
->
-  Happy Birthday, Simran!
-</motion.div>
-
+        <motion.h2
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ delay: 0.8, duration: 0.8 }}
+          className="absolute top-20 text-4xl md:text-5xl font-bold
+          text-transparent bg-clip-text
+          bg-gradient-to-r from-pink-400 via-fuchsia-400 to-purple-400"
+        >
+          Happy Birthday 🎉
+        </motion.h2>
       )}
 
-      <div className="relative flex flex-col items-center justify-center min-h-screen gap-8">
-
+      {/* CAKE */}
+      <div className="relative mt-20">
         <Cake lit={lit} />
 
-        <AnimatePresence mode="wait">
-          {!lit ? (
-            <motion.div
-              key="light"
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.8 }}
-            >
-              <GradientButton onClick={lightCandle}>
-                <Flame size={20} />
-                Light the Candle
-              </GradientButton>
-            </motion.div>
-          ) : (
-            <motion.div
-              key="next"
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 0.6 }}
-            >
-              <GradientButton onClick={onNext}>
-                Next <ArrowRight size={20} />
-              </GradientButton>
-            </motion.div>
-          )}
-        </AnimatePresence>
+        {/* SPARKLES */}
+        {lit &&
+          [...Array(8)].map((_, i) => (
+            <motion.span
+              key={i}
+              className="absolute w-2 h-2 bg-pink-400 rounded-full"
+              style={{
+                top: `${Math.random() * 120}px`,
+                left: `${Math.random() * 200}px`,
+              }}
+              initial={{ opacity: 0, scale: 0 }}
+              animate={{ opacity: [0, 1, 0], scale: [0, 1.5, 0] }}
+              transition={{
+                duration: 1.6,
+                repeat: Infinity,
+                delay: i * 0.2,
+              }}
+            />
+          ))}
+      </div>
+
+      {/* BUTTON */}
+      <div className="mt-16">
+        {!lit ? (
+          <GradientButton onClick={lightCandle}>
+            <Flame size={20} />
+            Light the Candle
+          </GradientButton>
+        ) : (
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 1.6 }}
+          >
+            <GradientButton onClick={onNext}>
+              Next <ArrowRight size={18} />
+            </GradientButton>
+          </motion.div>
+        )}
       </div>
     </div>
   );
 }
 
+/* ---------------- CAKE ---------------- */
+
 function Cake({ lit }) {
   return (
-    <div className="cake">
-      <div className="plate" />
-      <div className="layer layer-bottom" />
-      <div className="layer layer-middle" />
-      <div className="layer layer-top" />
-      <div className="icing" />
-      <div className="drip drip1" />
-      <div className="drip drip2" />
-      <div className="drip drip3" />
+    <div className="cake relative">
+      <div className="plate"></div>
+
+      <div className="layer layer-bottom"></div>
+      <div className="layer layer-middle"></div>
+      <div className="layer layer-top"></div>
+
+      <div className="icing"></div>
+      <div className="drip drip1"></div>
+      <div className="drip drip2"></div>
+      <div className="drip drip3"></div>
+
+      {/* TOPPER */}
+      <div className="absolute -top-14 left-1/2 -translate-x-1/2 text-pink-400 font-semibold">
+        🎀 For You
+      </div>
+
+      {/* CANDLE */}
       <div className="candle">
         {lit && (
           <motion.div
             className="flame"
-            initial={{ opacity: 0, scaleY: 0.3, y: 10 }}
-            animate={{ opacity: 1, scaleY: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
+            initial={{ opacity: 0, scaleY: 0.2 }}
+            animate={{ opacity: 1, scaleY: 1 }}
+            transition={{ duration: 0.6 }}
           />
         )}
       </div>

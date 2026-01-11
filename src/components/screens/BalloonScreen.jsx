@@ -19,7 +19,6 @@ export default function BalloonScreen({ onNext }) {
   const popBalloon = (id) => {
     if (popped.includes(id)) return;
 
-    // pop confetti
     confetti({
       particleCount: 25,
       spread: 45,
@@ -33,14 +32,16 @@ export default function BalloonScreen({ onNext }) {
   return (
     <div className="relative h-screen flex flex-col items-center justify-center overflow-hidden">
 
-      {/* TITLE */}
-      <motion.p
-        initial={{ opacity: 0, y: -10 }}
-        animate={{ opacity: 1, y: 0 }}
-        className="text-white text-lg mb-6"
-      >
-        Pop all 4 balloons
-      </motion.p>
+      {/* TITLE – disappears when all popped */}
+      {popped.length < 4 && (
+        <motion.p
+          initial={{ opacity: 0, y: -10 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="text-white text-lg mb-6"
+        >
+          Pop all 4 balloons
+        </motion.p>
+      )}
 
       {/* BALLOONS */}
       {balloons.map((b, i) => (
@@ -74,7 +75,7 @@ export default function BalloonScreen({ onNext }) {
         </AnimatePresence>
       ))}
 
-      {/* TEXT APPEAR */}
+      {/* TEXT AFTER POP */}
       <div className="absolute top-[260px] flex gap-8 text-pink-400 font-semibold text-lg">
         {balloons.map((b) =>
           popped.includes(b.id) ? (

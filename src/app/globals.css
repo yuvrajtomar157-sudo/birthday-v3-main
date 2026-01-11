@@ -1,0 +1,217 @@
+@import "tailwindcss";
+
+/* =======================
+   GLOBAL BASICS
+======================= */
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+button {
+  cursor: pointer;
+}
+
+/* =======================
+   SPINNER (if used)
+======================= */
+
+.spinner {
+  background-image: linear-gradient(rgb(186, 66, 255) 35%, rgb(0, 225, 255));
+  width: 180px;
+  height: 180px;
+  animation: spinning82341 1.7s linear infinite;
+  border-radius: 100px;
+  filter: blur(1px);
+  box-shadow:
+    0px -5px 20px rgb(186, 66, 255),
+    0px 5px 20px rgb(0, 225, 255);
+}
+
+.spinner1 {
+  background-color: rgb(14, 0, 15);
+  width: 180px;
+  height: 180px;
+  border-radius: 100px;
+  filter: blur(10px);
+}
+
+@keyframes spinning82341 {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* =======================
+   CANDLE FLAME ANIMATION
+======================= */
+
+@keyframes flicker {
+  0% {
+    transform: scale(1) skewX(2deg);
+    opacity: 0.9;
+  }
+  20% {
+    transform: scale(1.05) skewX(-3deg);
+    opacity: 1;
+  }
+  40% {
+    transform: scale(0.95) skewX(4deg);
+    opacity: 0.85;
+  }
+  60% {
+    transform: scale(1.1) skewX(-2deg);
+    opacity: 1;
+  }
+  80% {
+    transform: scale(0.98) skewX(3deg);
+    opacity: 0.9;
+  }
+  100% {
+    transform: scale(1) skewX(0deg);
+    opacity: 0.95;
+  }
+}
+
+
+/* =======================
+   🎂 CAKE (FIXED CENTER)
+======================= */
+
+.cake {
+  position: relative;
+  width: 250px;
+  height: 200px;
+
+  /* 🔥 ONLY CENTERING */
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.cake * {
+  position: absolute;
+}
+
+/* Plate */
+.plate {
+  width: 270px;
+  height: 110px;
+  bottom: -10px;
+  left: -10px;
+  background: #ccc;
+  border-radius: 50%;
+  box-shadow:
+    0 2px 0 #999,
+    0 4px 0 #999,
+    0 10px 30px rgba(0,0,0,.4);
+}
+
+/* Layers */
+.layer {
+  width: 250px;
+  height: 100px;
+  border-radius: 50%;
+  background: #553c13;
+  box-shadow:
+    0 4px 0 #604319,
+    0 8px 0 #4a3410,
+    0 12px 0 #3d2b0d;
+}
+
+.layer-top { top: 0; }
+.layer-middle { top: 33px; }
+.layer-bottom { top: 66px; }
+
+/* Icing */
+.icing {
+  top: 2px;
+  left: 5px;
+  width: 240px;
+  height: 90px;
+  background: #fff3e6;
+  border-radius: 50%;
+}
+
+.icing::before {
+  content: "";
+  position: absolute;
+  inset: 5px;
+  background: #f5ead8;
+  border-radius: 50%;
+}
+
+/* Drips */
+.drip {
+  background: #f0e4d0;
+  border-bottom-left-radius: 25px;
+  border-bottom-right-radius: 25px;
+}
+
+.drip1 {
+  top: 53px;
+  left: 5px;
+  width: 40px;
+  height: 48px;
+  transform: skewY(15deg);
+}
+
+.drip2 {
+  top: 69px;
+  left: 181px;
+  width: 50px;
+  height: 60px;
+  transform: skewY(-15deg);
+}
+
+.drip3 {
+  top: 54px;
+  left: 90px;
+  width: 80px;
+  height: 60px;
+  border-bottom-left-radius: 40px;
+  border-bottom-right-radius: 40px;
+}
+
+/* Candle */
+.candle {
+  width: 16px;
+  height: 50px;
+  background: #7B020B;
+  border-radius: 8px / 4px;
+  top: -20px;
+  left: 50%;
+  margin-left: -8px;
+  z-index: 10;
+}
+
+.candle::before {
+  content: "";
+  width: 16px;
+  height: 8px;
+  background: #a40513;
+  border-radius: 50%;
+  position: absolute;
+  top: 0;
+}
+
+/* Flame */
+.flame {
+  width: 15px;
+  height: 35px;
+  background: orange;
+  border-radius: 10px 10px 10px 10px / 25px 25px 10px 10px;
+  top: -34px;
+  left: 50%;
+  margin-left: -7.5px;
+  animation: flicker 1s ease-in-out infinite alternate;
+  transform-origin: 50% 90%;
+  box-shadow:
+    0 0 10px rgba(255,165,0,.5),
+    0 0 30px rgba(255,165,0,.4);
+}

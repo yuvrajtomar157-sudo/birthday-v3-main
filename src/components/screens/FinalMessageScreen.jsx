@@ -1,67 +1,40 @@
-"use client";
-
-import { motion } from "framer-motion";
 import GradientButton from "../GradientButton";
-import confetti from "canvas-confetti";
-import { RotateCcw } from "lucide-react";
-import { useEffect } from "react";
 
-export default function FinalMessageScreen({ onReplay }) {
 
-  // soft confetti once
-  useEffect(() => {
-    confetti({
-      particleCount: 120,
-      spread: 80,
-      startVelocity: 25,
-      gravity: 0.6,
-      scalar: 0.8,
-      origin: { y: 0.5 },
-    });
-  }, []);
-
+export default function FinalMessageScreen({ onNext }) {
   return (
-    <div className="relative h-screen flex items-center justify-center px-4 overflow-hidden text-center">
+    <div className="min-h-screen flex flex-col items-center justify-center text-center px-6 bg-gradient-to-b from-black via-[#1a001a] to-black">
 
-      <motion.div
-        initial={{ opacity: 0, scale: 0.85, y: 30 }}
-        animate={{ opacity: 1, scale: 1, y: 0 }}
-        transition={{ duration: 0.8, ease: "easeOut" }}
-        className="max-w-md w-full rounded-2xl
-        bg-gradient-to-br from-purple-700/80 via-fuchsia-700/80 to-pink-600/80
-        backdrop-blur-xl shadow-2xl p-6"
-      >
-        <motion.p
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.3 }}
-          className="text-white text-lg font-semibold mb-3"
-        >
-          Lots of love for you ❤️
-        </motion.p>
+      <h2 className="text-pink-300 text-xl font-semibold">
+        Lots of Wishes for you ❤️
+      </h2>
 
-        <motion.p
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.6 }}
-          className="text-white/90 text-sm leading-relaxed mb-6"
-        >
-          Once again, Happy Birthday.  
-          I hope this little surprise made you smile  
-          and reminded you how special you are.
-        </motion.p>
+      <p className="mt-4 text-sm text-pink-400 max-w-md leading-relaxed">
+        Once again, Happy Birthday.
+        <br />
+        I hope this little surprise made you smile
+        <br />
+        and reminded you how special you are.
+      </p>
 
-        <motion.div
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.9 }}
-        >
-          <GradientButton onClick={onReplay}>
-            <RotateCcw size={18} />
-            Replay
-          </GradientButton>
-        </motion.div>
-      </motion.div>
+      {/* 📝 SPACE FOR YOUR CUSTOM MESSAGE */}
+      <div className="mt-6 bg-white/10 backdrop-blur-md rounded-xl px-5 py-4 max-w-md w-full">
+        <p className="text-sm text-pink-200 leading-relaxed">
+          {/* 
+            👇 YAHAN TUM APNA MESSAGE LIKHOGE 
+            (teasing / sweet / jo bhi man ho)
+          */}
+        </p>
+      </div>
+
+      {/* ❌ NO replay button here */}
+
+      <div className="mt-7">
+        <GradientButton onClick={onNext}>
+          One last thing 👀
+        </GradientButton>
+      </div>
+
     </div>
   );
 }

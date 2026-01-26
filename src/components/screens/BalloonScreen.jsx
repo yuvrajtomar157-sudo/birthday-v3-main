@@ -10,8 +10,8 @@ export default function BalloonScreen({ onNext }) {
   const balloons = [
     { id: 1, x: "15%", text: "You" },
     { id: 2, x: "35%", text: "are" },
-    { id: 3, x: "55%", text: "a" },
-    { id: 4, x: "75%", text: "Cutiee" },
+    { id: 3, x: "55%", text: "truly" },
+    { id: 4, x: "75%", text: "Beautifull!!" },
   ];
 
   const [popped, setPopped] = useState([]);

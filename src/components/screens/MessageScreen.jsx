@@ -7,16 +7,23 @@ import { ArrowRight } from "lucide-react";
 import confetti from "canvas-confetti";
 
 const fullMessage = `
-Happy Birthday, Simran! 💖
+Happy Birthday, Simran 💖
 
-You deserve all the happiness, love, and smiles in the world today and always.
-You have a special way of making everything around you brighter — your smile,
-your kindness, and the warmth you bring into people’s lives.
+Aaj ka din thoda sa special hona hi chahiye,
+kyunki aaj tumhara din hai,
 
-I hope your day is filled with laughter, sweet surprises, and moments that
-make your heart feel full. You truly are one of a kind.
+Tumhari ek simple si smile bhi
+cheezon ko halka kar deti hai,
+aur ye quality sabke paas nahi hoti.
 
-Stay amazing. Always. ✨
+I hope aaj ka din tumhe wahi de
+jo tum deserve karti ho —
+shaanti, hasi, aur woh chhoti-chhoti khushiyan
+jo bina reason ke acchi lagti hain.
+
+Bas aise hi raho.
+Real. Simple. Special. ✨
+
 `;
 
 export default function MessageScreen({ onNext }) {

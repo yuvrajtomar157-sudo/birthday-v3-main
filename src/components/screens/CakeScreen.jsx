@@ -37,7 +37,7 @@ export default function CakeScreen({ onNext }) {
           text-transparent bg-clip-text
           bg-gradient-to-r from-pink-400 via-fuchsia-400 to-purple-400"
         >
-          Happy Birthday 🎉
+          Happy Birthday Simran 🎉
         </motion.h2>
       )}
 
